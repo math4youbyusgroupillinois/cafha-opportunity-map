@@ -2,8 +2,8 @@
     var lastClicked;
     var boundaries;
     var marker;
-    var map = L.map('map', {minZoom: 6})
-        .fitBounds([[36.970298, -87.495199],[42.5083380000001,-91.5130789999999]]);
+    var map = L.map('map', { center:[41.8, -88], zoom: 9 });
+        // .fitBounds([[38, -87],[42.5083380000001,-91.5130789999999]]);
     var googleLayer = new L.Google('ROADMAP', {animate: false});
     map.addLayer(googleLayer);
     map.on('zoomstart', function(e){
@@ -34,7 +34,7 @@
         return this._div;
     }
 
-    $.when($.getJSON('data/finished_files/merged_eitc.geojson')).then(
+    $.when($.getJSON('data/raw/select_tracts_simple.geojson')).then(
         function(shapes){
 
             boundaries = L.geoJson(shapes, {
@@ -103,48 +103,19 @@
         var district = parseInt(properties['ILHOUSEDIS']);
         var blob = "<div>\
             <p><a href='index.html'>&laquo; back to State view</a></p>\
-            <h3>" + properties['HOUSEREP'] + " (" + properties['PARTY'] + "), Illinois House District " + district + "</h3>\
+            <h3>" + 'POPULATE CENSUS TRACT' + "</h3>\
             <table class='table'>\
               <tbody>\
                   <tr>\
-                      <td>Households receiving EITC</td>\
-                      <td>" + addCommas(properties['EITC']) + "</td>\
+                      <td>POPULATE STAT</td>\
+                      <td>" + 'POPULATE FIGURE' + "</td>\
                   </tr>\
                   <tr>\
-                      <td>Children in EITC households</td>\
-                      <td>" + addCommas(properties['KIDEITC']) + "</td>\
+                      <td>POPULATE STAT</td>\
+                      <td>" + 'POPULATE FIGURE' + "</td>\
                   </tr>\
               </tbody>\
             </table>\
-            <h3>Local Impact</h3>\
-            <table class='table'>\
-              <thead>\
-                  <tr>\
-                      <th></th>\
-                      <th>Now (10%)</th>\
-                      <th>With expansion (20%)</th>\
-                  </tr>\
-              </thead>\
-              <tbody>\
-                  <tr>\
-                      <td>Average boost to working families' income</td>\
-                      <td>" + accounting.formatMoney(properties['KIDAVGEITC'], {precision: 0}) + "</td>\
-                      <td>" + accounting.formatMoney(properties['KIDAVGE_01'], {precision: 0}) + "</td>\
-                  </tr>\
-                  <tr>\
-                      <td>Annual boost to local economy</td>\
-                      <td>" + accounting.formatMoney(properties['MULTEFFECT'], {precision: 2}) + "M</td>\
-                      <td>" + accounting.formatMoney(properties['MULTEFF_01'], {precision: 2}) + "M</td>\
-                  </tr>\
-              </tbody>\
-            </table>\
-            <div class='col-lg-6'>\
-              <p><a target='_blank' class='btn btn-primary' href='docs/EITC Legislative Fact Sheets FINAL " + district + ".pdf'><i class='icon-download'></i> Download district profile</a></p>\
-              <p><a target='_blank' href='docs/EITC Legislative Fact Sheets FINAL " + district + ".pdf'><img class='img-responsive img-rounded' src='images/eitc_factsheet.png' alt='EITC Factsheet' /></a></p>\
-            </div>\
-            <div class='col-lg-6'>\
-              <a class='btn btn-primary' target='_blank' href='http://salsa4.salsalabs.com/o/50920/p/dia/action3/common/public/?action_KEY=10927'><i class='icon-bullhorn'></i> Tell your lawmaker EITC Works!</a>\
-            </div>\
             <div class='clearfix'></div>\
             </div>";
         return blob
