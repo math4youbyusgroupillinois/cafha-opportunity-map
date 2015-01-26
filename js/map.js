@@ -34,7 +34,7 @@
         return this._div;
     }
 
-    $.when($.getJSON('data/raw/select_tracts_simple.geojson')).then(
+    $.when($.getJSON('data/raw/select_tracts.geojson')).then(
         function(shapes){
 
             boundaries = L.geoJson(shapes, {
@@ -96,11 +96,11 @@
           layer.setStyle({weight: 1})
         })
 
-        var labelText = feature.properties['HOUSEREP'] + " (" + feature.properties['PARTY'] + ")<br />Illinois House District " + parseInt(feature.properties['ILHOUSEDIS']);
+        var labelText = 'POPULATE CENSUS TRACT LABEL';
         layer.bindLabel(labelText);
     }
     function featureInfo(properties){
-        var district = parseInt(properties['ILHOUSEDIS']);
+        // var census_tract = POPULATE THIS;
         var blob = "<div>\
             <p><a href='index.html'>&laquo; back to State view</a></p>\
             <h3>" + 'POPULATE CENSUS TRACT' + "</h3>\
